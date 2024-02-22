@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require('path')
 const applicantRoutes = require('./routes/applicantRoutes');
 const LawyerRoutes = require("./routes/lawyerRoutes");
 const casemanagerRoutes = require("./routes/casemanagerRoutes"); 
@@ -41,7 +42,17 @@ catch (error)
   {
   console.log(error);    
   }
+  const Port = process.env.PORT || 5000
 
-app.listen(process.env.PORT, () => {
-  console.log(`App is running on ${process.env.PORT}`);
+if(process.env.NODE_ENV === "production")
+{
+  app.use(express.static("build"))
+}
+app.get("/",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"client", "build")))
+  res.sendFile(path.resolve(__dirname, "client", "build","index.html"))
+})
+
+app.listen(Port, () => {
+  console.log(`App is running on ${Port}`);
 });

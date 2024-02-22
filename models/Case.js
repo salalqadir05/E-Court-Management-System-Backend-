@@ -69,6 +69,12 @@ const CaseSchema = new mongoose.Schema({
     default : "off"
 
 
+  },
+  filename : {
+    type : String
+  },
+  path : {
+    type : String 
   }
 });
 

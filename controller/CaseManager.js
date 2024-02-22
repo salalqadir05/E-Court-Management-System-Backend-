@@ -38,7 +38,7 @@ const login = async(req,res,next) =>{
         const compare_Password = await bcrypt.compare(Password,checkcasemanager.Password);
         if(!compare_Password)
         {
-            return res.status(400).json({ error: "Please try to login with correct credentials",status :false });
+            return res.json({ error: "Please try to login with correct credentials",status :false });
         }
         const data = {
             checkcasemanager : {

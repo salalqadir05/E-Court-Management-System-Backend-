@@ -325,6 +325,26 @@ const updatecomments = async(req,res)=>{
   }
 
 }
+
+const uploaddocument = async(req,res)=>{
+ try{
+  const {caseid,newfilename, newpath} = req.body;
+  console.log(caseid,newfilename, newpath)
+  const uploadfile = Case.findByIdAndUpdate(
+     caseid,
+    {filename : newfilename},
+    {new : true}
+  )
+
+  
+
+  res.json({ message: 'File updated successfully.',uploadfile});
+} catch (error) {
+  console.error('Error updating file:', error);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+};
+
 module.exports = {
   registerCase,
   fetch_and_count_Cases,
@@ -336,6 +356,7 @@ module.exports = {
   assignacourt,
   updatecomments,
   registerCasebyApplicant,
-  fetchApplicantcases
+  fetchApplicantcases,
+  uploaddocument
 
 };
