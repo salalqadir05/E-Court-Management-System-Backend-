@@ -22,7 +22,15 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(cors(
+    {
+        origin : "https://e-court-management-system-g43yl7x8q.vercel.app/",
+        methods : ["POST","PUT","GET","Delete"
+,"PULL"],
+        credentials : true
+                   }
+    
+));
 app.use(express.json());
 app.use("/api/auth", applicantRoutes);
 app.use("/api/authlawyer", LawyerRoutes);
